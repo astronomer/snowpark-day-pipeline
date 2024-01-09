@@ -1,4 +1,7 @@
-toy_dags/decorator_examples.py
-toy_dags/intro_to_airflow_dag.py
-toy_dags/xcom_explanation.py
+dev/decorator_examples.py
+dev/intro_to_airflow_dag.py
+dev/xcom_explanation.py
 dev/example_dag_basic.py
+dev/xcom_test.py
+dev/xcom_test_cross_dag_pull.py
+dev/snowflake_regular_conn_test.py

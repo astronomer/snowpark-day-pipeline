@@ -1,6 +1,7 @@
 """
 ## Snowpark with Airflow
 
+This DAG shows how to use Snowpark with Airflow ETL.
 """
 
 from airflow.datasets import Dataset
