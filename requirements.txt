@@ -4,4 +4,4 @@ apache-airflow-providers-amazon==8.15.0
 snowflake-snowpark-python[pandas]==1.11.1
 snowflake-ml-python==1.1.2
 matplotlib==3.8.2
-/tmp/astro_provider_snowpark-0.0.0-py3-none-any.whl
+git+https://github.com/astronomer/astro-provider-snowflake.git

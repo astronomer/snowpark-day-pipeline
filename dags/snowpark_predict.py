@@ -1,6 +1,7 @@
 """
 ## Snowpark with Airflow
 
+This DAG shows how to use Snowpark ML with Airflow for predictions.
 """
 
 from airflow.datasets import Dataset
@@ -119,6 +120,7 @@ def snowpark_predict():
         for entry in trained_models:
             target = entry["target"]
             score = entry["score"]
+            print(f"target: {target}, score: {score}")
             if target not in highest_scores or score > highest_scores[target]["score"]:
                 highest_scores[target] = entry
         return list(highest_scores.values())
@@ -127,6 +129,7 @@ def snowpark_predict():
 
     @task.snowpark_python(
         snowflake_conn_id=SNOWFLAKE_CONN_ID,
+        queue="ml-workers",
     )
     def predict(
         db,

@@ -1,6 +1,7 @@
 """
 ## Snowpark with Airflow
 
+This DAG shows how to use Snowpark ML with Airflow for model training.
 """
 
 from airflow.datasets import Dataset
@@ -32,11 +33,11 @@ MY_SNOWFLAKE_REGULAR_WAREHOUSE = "HUMANS"
     params={
         "targets": Param(
             [
-                '"Läckerli_boxes"',
-                '"Willisauer_Ringli_boxes"',
-                '"Mandelbärli_boxes"',
-                '"Chocolate_Brownies_boxes"',
-                '"total_boxes"',
+                "Läckerli_boxes",
+                "Willisauer_Ringli_boxes",
+                "Mandelbärli_boxes",
+                "Chocolate_Brownies_boxes",
+                "total_boxes",
             ],
             type="array",
         ),
@@ -155,6 +156,7 @@ def snowpark_ml_train():
 
     @task.snowpark_python(
         snowflake_conn_id=SNOWFLAKE_CONN_ID,
+        queue="ml-workers",
     )
     def train_models(
         db,
@@ -182,7 +184,7 @@ def snowpark_ml_train():
             *[column for column in train_data.columns if "boxes" in column]
         ).columns
 
-        label_col = target
+        label_col = '"' + target + '"'
 
         r = LassoCV(
             input_cols=feature_cols,
@@ -196,6 +198,7 @@ def snowpark_ml_train():
 
         r.fit(train_data)
         score = r.score(test_data)
+        print("Target: " + label_col)
         print(f"R2: {score:.4f}")
         for c, f in zip(r.to_sklearn().coef_, r.to_sklearn().feature_names_in_):
             print(f"{f}: {c}")
