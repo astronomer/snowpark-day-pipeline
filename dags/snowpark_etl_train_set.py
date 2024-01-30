@@ -11,6 +11,7 @@ from pendulum import datetime, duration
 
 # provide the connection id of the Airflow connection to Snowflake
 SNOWFLAKE_CONN_ID = "snowflake_default"
+AWS_CONN_ID = "aws_default"
 
 # provide your db, schema, warehouse, and table names
 MY_SNOWFLAKE_DATABASE = "SNOWPARK_DAY_DEMO_DB"  # an existing database
@@ -24,10 +25,10 @@ MY_SNOWFLAKE_REGULAR_WAREHOUSE = "HUMANS"
 
 # provide the location of the training datasets
 CUSTOMER_TRAIN_SET_PATH = ObjectStoragePath(
-    "s3://tutorialtjf231942-s3-bucket1/trial_customers/", conn_id="aws_default"
+    "s3://tutorialtjf231942-s3-bucket1/trial_customers/", conn_id=AWS_CONN_ID
 )
 ORDERS_TRAIN_SET_PATH = ObjectStoragePath(
-    "s3://tutorialtjf231942-s3-bucket1/orders/", conn_id="aws_default"
+    "s3://tutorialtjf231942-s3-bucket1/orders/", conn_id=AWS_CONN_ID
 )
 
 
